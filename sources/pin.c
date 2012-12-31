@@ -25,7 +25,6 @@ Lesser General Public License for more details.
 
 // LPC1769 port resolving
 // index to this array to get a correct port pointer
-// This is a PRIVATE definition (cannot be in pin.h - multiple def error when include pin.h)
 const uint8_t digital_pin_to_GPIO_port[] =
 {
 		/*  PORT     LPC_MAP   PIN_MAP   */
