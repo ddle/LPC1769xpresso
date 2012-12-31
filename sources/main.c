@@ -221,9 +221,6 @@ int main (void)
 	//	// PIN_SDIN  9
 	//	// PIN_SCLK  7
 
-	// pin declared on port 0
-	//LCDInit(15,18,23,16,24,50);
-
 	// init with port resolver
 	LCDInit(12,15,20,13,21,50);
 	//setContrast(55);
@@ -243,13 +240,12 @@ int main (void)
 	uint8_t rowPins[4] = {63, 57, 58, 60}; //connect to the row pinouts of the keypad
 	uint8_t colPins[3] = {62, 64, 59}; //connect to the column pinouts of the keypad
 
-//	KeyPadInit( makeKeymap(numberKeys), rowPins, colPins, 4, 3 );
-//	// Add an event listener.
-//	KeyPadAddEventListener(keypadEvent);
-
+	KeyPadInit( makeKeymap(numberKeys), rowPins, colPins, 4, 3 );
+	// Add an event listener.
+	KeyPadAddEventListener(keypadEvent);
 
 	// test RF22
-	// init radio ( chip select - D6/p0.6 ; nIRQ - D56/p2.4 ; 1 == SSP1
+	//init radio : chip select - D6/p0.6 ; nIRQ - D56/p2.4 ; 1 == SSP1
 	if (RF22init(6,56,1) == false)
 	{
 		LCDdrawstring(0,0,"init failed");
@@ -271,7 +267,7 @@ int main (void)
 
 	while(1)
 	{
-		//delayMs(1,100); // slow polling down a little bit
+		// test keypad:
 		//char key = KeyPadGetKey();
 		//	  if (key != NO_KEY)
 		//	  {
@@ -280,10 +276,10 @@ int main (void)
 		//		  LCDdisplay();
 		//	  }
 
-
 		_delay_ms(100);
-		rx();
-		//tx();
+		// test radio
+		rx();   // receive and display on LCD
+		//tx(); // send back message (ping)
 	}
 
 	while ( 1 );
